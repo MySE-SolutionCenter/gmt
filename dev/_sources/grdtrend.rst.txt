@@ -47,7 +47,7 @@ Required Arguments
 ------------------
 
 *grdfile*
-    The name of a 2-D binary grid file.
+    The name of a 2-D binary grid file. (See :ref:`Grid File Formats <grd_inout_full>`).
 
 .. _-N:
 
@@ -58,8 +58,12 @@ Required Arguments
 Optional Arguments
 ------------------
 
+.. _-D:
+
 **-D**\ *diff.nc*
     Write the difference (input data - trend) to the file *diff.nc*.
+
+.. _-R:
 
 .. |Add_-R| replace:: Using the **-R** option
     will select a subsection of the input grid. If this subsection
@@ -99,8 +103,6 @@ equivalent to the m#s in the equation described above. The description
 above is to allow the user to match **-N** with the order of the
 polynomial surface. See :doc:`grdmath` if you need to evaluate the trend
 using the reported coefficients.
-
-.. include:: explain_grd_inout_short.rst_
 
 Examples
 --------

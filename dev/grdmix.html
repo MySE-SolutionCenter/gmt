@@ -14,6 +14,11 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="_static/style.css" type="text/css" />
 
   
@@ -33,8 +38,10 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/togglebutton.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -132,6 +139,7 @@
 <li class="toctree-l1"><a class="reference internal" href="debug.html">Debugging GMT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">GMT C API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="postscriptlight.html">PostScriptLight C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devdocs.html">Developer Documentation</a></li>
 </ul>
 
             
@@ -226,17 +234,17 @@
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <p><strong>gmt grdmix</strong>
 <em>raster1</em> [ <em>raster2</em> [ <em>raster3</em>]]
-<a class="reference internal" href="#g"><span> <strong>-G</strong></span></a></strong><em>outfile</em>
-[ <a class="reference internal" href="#a"><span> <strong>-A</strong></span></a></strong><em>alpha</em> ]
-[ <a class="reference internal" href="#c"><span> <strong>-C</strong></span></a></strong> ]
-[ <a class="reference internal" href="#d"><span> <strong>-D</strong></span></a></strong> ]
-[ <a class="reference internal" href="#i"><span> <strong>-I</strong></span></a></strong><em>intensity</em> ]
-[ <a class="reference internal" href="#m"><span> <strong>-M</strong></span></a></strong> ]
-[ <a class="reference internal" href="#n"><span> <strong>-N</strong></span></a></strong>[<strong>i</strong>|<strong>o</strong>][<em>factor</em>] ]
-[ <a class="reference internal" href="#q"><span> <strong>-Q</strong></span></a></strong> ]
-[ <a class="reference internal" href="#r"><span> <strong>-R</strong></span></a></strong><em>region</em> ]
-[ <a class="reference internal" href="#v"><span> <strong>-V</strong></span></a></strong>[<em>level</em>] ]
-[ <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong><em>weights</em> ]
+<a class="reference internal" href="#g"><span><strong>-G</strong></span></a></strong><em>outfile</em>
+[ <a class="reference internal" href="#a"><span><strong>-A</strong></span></a></strong><em>alpha</em> ]
+[ <a class="reference internal" href="#c"><span><strong>-C</strong></span></a></strong> ]
+[ <a class="reference internal" href="#d"><span><strong>-D</strong></span></a></strong> ]
+[ <a class="reference internal" href="#i"><span><strong>-I</strong></span></a></strong><em>intensity</em> ]
+[ <a class="reference internal" href="#m"><span><strong>-M</strong></span></a></strong> ]
+[ <a class="reference internal" href="#n"><span><strong>-N</strong></span></a></strong>[<strong>i</strong>|<strong>o</strong>][<em>factor</em>] ]
+[ <a class="reference internal" href="#q"><span><strong>-Q</strong></span></a></strong> ]
+[ <a class="reference internal" href="#r"><span><strong>-R</strong></span></a></strong><em>region</em> ]
+[ <a class="reference internal" href="#v"><span><strong>-V</strong></span></a></strong>[<em>level</em>] ]
+[ <a class="reference internal" href="#w"><span><strong>-W</strong></span></a></strong><em>weights</em> ]
 [ <strong>-f</strong><a class="reference internal" href="gmt.html#f-full"><span class="std std-ref">flags</span></a> ]
 [ <strong>--PAR</strong>=<em>value</em> ]</p>
 <p><strong>Note:</strong> No space is allowed between the option flag and the associated arguments.</p>
@@ -268,7 +276,8 @@ images or grids.  If three are given then they must all be grids and
 </dl>
 <dl class="simple" id="g">
 <dt><strong>-G</strong><em>outfile</em></dt><dd><p>The name for the output raster.  For images, use one of these extensions:
-tif (GeoTIFF), gif, png, jpg, bmp, or ppm.</p>
+tif (GeoTIFF), gif, png, jpg, bmp, or ppm. For grids, see
+<a class="reference internal" href="gmt.html#grd-inout-full"><span class="std std-ref">Grid File Formats</span></a>.</p>
 </dd>
 </dl>
 </div>
@@ -346,14 +355,6 @@ any module-specific option (but not the GMT common options), then exit.</p>
 </dd>
 </dl>
 </div>
-<div class="section" id="grid-file-formats">
-<h2>Grid File Formats<a class="headerlink" href="#grid-file-formats" title="Permalink to this headline">¶</a></h2>
-<p>By default GMT writes out grid as single precision floats in a
-COARDS-complaint netCDF file format. However, GMT is able to produce
-grid files in many other commonly used grid file formats and also
-facilitates so called “packing” of grids, writing out floating point
-data as 1- or 2-byte integers. <a class="reference internal" href="gmt.html#grd-inout-full"><span class="std std-ref">(more …)</span></a></p>
-</div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p><strong>Note</strong>: Below are some examples of valid syntax for this module.
@@ -421,9 +422,9 @@ applying intensities from intens.grd and add transparency from transp.grd grids,
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, The GMT Team.
+        &copy; Copyright 2021, The GMT Team.
       <span class="lastupdated">
-        Last updated on Dec 02, 2020.
+        Last updated on Mar 09, 2021.
       </span>
 
     </p>

@@ -19,7 +19,7 @@ Synopsis
 [ |-C|\ *convergence_limit*\ [%] ]
 [ |-J|\ *parameters* ]
 [ |-D|\ *breakline_file*\ [**+z**\ [*level*]] ]
-[ |-L|\ **l**\ *lower* ] [ **-Lu**\ *upper* ]
+[ |-L|\ **l**\ *lower* ] [ |-L|\ **u**\ *upper* ]
 [ |-M|\ *max_radius* ]
 [ |-N|\ *max_iterations* ]
 [ |-Q| ]
@@ -36,6 +36,7 @@ Synopsis
 [ |SYN_OPT-i| ]
 [ |SYN_OPT-qi| ]
 [ |SYN_OPT-r| ]
+[ |SYN_OPT-w| ]
 [ |SYN_OPT-:| ]
 [ |SYN_OPT--| ]
 
@@ -116,8 +117,6 @@ Optional Arguments
     by the grid spacing multiplier.
 
 .. _-J:
-
-**-J**\ *parameters*
 
 .. |Add_-J| replace::
     Select the data map projection. This projection is only used to add a referencing info
@@ -242,6 +241,8 @@ Optional Arguments
 
 .. |Add_nodereg| unicode:: 0x20 .. just an invisible code
 .. include:: explain_nodereg.rst_
+
+.. include:: explain_-w.rst_
 
 .. include:: explain_colon.rst_
 

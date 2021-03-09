@@ -14,6 +14,11 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="_static/style.css" type="text/css" />
 
   
@@ -33,7 +38,10 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script src="_static/togglebutton.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
@@ -132,6 +140,7 @@
 <li class="toctree-l1"><a class="reference internal" href="debug.html">Debugging GMT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">GMT C API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="postscriptlight.html">PostScriptLight C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devdocs.html">Developer Documentation</a></li>
 </ul>
 
             
@@ -224,16 +233,16 @@
 <p>Linear regression of 1-D data sets</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><strong>gmt regress</strong> [ <em>table</em> ] [ <a class="reference internal" href="#a"><span> <strong>-A</strong></span></a></strong>[<em>min</em>/<em>max</em>/<em>inc</em>][<strong>+f</strong>[<strong>n</strong>|<strong>p</strong>]] ]
-[ <a class="reference internal" href="#c"><span> <strong>-C</strong></span></a></strong><em>level</em> ]
-[ <a class="reference internal" href="#e"><span> <strong>-E</strong></span></a></strong><strong>x</strong>|<strong>y</strong>|<strong>o</strong>|<strong>r</strong> ]
-[ <a class="reference internal" href="#f"><span> <strong>-F</strong></span></a></strong><em>flags</em> ]
-[ <a class="reference internal" href="#n"><span> <strong>-N</strong></span></a></strong><strong>1</strong>|<strong>2</strong>|<strong>r</strong>|<strong>w</strong> ]
-[ <a class="reference internal" href="#s"><span> <strong>-S</strong></span></a></strong>[<strong>r</strong>] ]
-[ <a class="reference internal" href="#t"><span> <strong>-T</strong></span></a></strong>[<em>min/max</em>/]<em>inc</em>[<strong>+i</strong>|<strong>n</strong>] |<a class="reference internal" href="#t"><span> <strong>-T</strong></span></a></strong><em>file</em>|<em>list</em> ]
-[ <a class="reference internal" href="#v"><span> <strong>-V</strong></span></a></strong>[<em>level</em>] ]
-[ <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong>[<strong>w</strong>][<strong>x</strong>][<strong>y</strong>][<strong>r</strong>] ]
-[ <a class="reference internal" href="#z"><span> <strong>-Z</strong></span></a></strong>[±]<em>limit</em> ]
+<p><strong>gmt regress</strong> [ <em>table</em> ] [ <a class="reference internal" href="#a"><span><strong>-A</strong></span></a></strong>[<em>min</em>/<em>max</em>/<em>inc</em>][<strong>+f</strong>[<strong>n</strong>|<strong>p</strong>]] ]
+[ <a class="reference internal" href="#c"><span><strong>-C</strong></span></a></strong><em>level</em> ]
+[ <a class="reference internal" href="#e"><span><strong>-E</strong></span></a></strong><strong>x</strong>|<strong>y</strong>|<strong>o</strong>|<strong>r</strong> ]
+[ <a class="reference internal" href="#f"><span><strong>-F</strong></span></a></strong><em>flags</em> ]
+[ <a class="reference internal" href="#n"><span><strong>-N</strong></span></a></strong><strong>1</strong>|<strong>2</strong>|<strong>r</strong>|<strong>w</strong> ]
+[ <a class="reference internal" href="#s"><span><strong>-S</strong></span></a></strong>[<strong>r</strong>] ]
+[ <a class="reference internal" href="#t"><span><strong>-T</strong></span></a></strong>[<em>min/max</em>/]<em>inc</em>[<strong>+i</strong>|<strong>n</strong>] |<a class="reference internal" href="#t"><span><strong>-T</strong></span></a></strong><em>file</em>|<em>list</em> ]
+[ <a class="reference internal" href="#v"><span><strong>-V</strong></span></a></strong>[<em>level</em>] ]
+[ <a class="reference internal" href="#w"><span><strong>-W</strong></span></a></strong>[<strong>w</strong>][<strong>x</strong>][<strong>y</strong>][<strong>r</strong>] ]
+[ <a class="reference internal" href="#z"><span><strong>-Z</strong></span></a></strong>[±]<em>limit</em> ]
 [ <strong>-a</strong><a class="reference internal" href="gmt.html#aspatial-full"><span class="std std-ref">flags</span></a> ]
 [ <strong>-b</strong><a class="reference internal" href="gmt.html#bi-full"><span class="std std-ref">binary</span></a> ]
 [ <strong>-d</strong><a class="reference internal" href="gmt.html#d-full"><span class="std std-ref">nodata</span></a> ]
@@ -243,6 +252,7 @@
 [ <strong>-i</strong><a class="reference internal" href="gmt.html#icols-full"><span class="std std-ref">flags</span></a> ]
 [ <strong>-o</strong><a class="reference internal" href="gmt.html#ocols-full"><span class="std std-ref">flags</span></a> ]
 [ <strong>-q</strong><a class="reference internal" href="gmt.html#q-full"><span class="std std-ref">flags</span></a> ]
+[ <strong>-w</strong><a class="reference internal" href="gmt.html#w-full"><span class="std std-ref">flags</span></a> ]
 [ <strong>--PAR</strong>=<em>value</em> ]</p>
 <p><strong>Note:</strong> No space is allowed between the option flag and the associated arguments.</p>
 </div>
@@ -336,7 +346,7 @@ use <strong>-Sr</strong> to reverse this and only output the outlier records.</p
 </dd>
 </dl>
 <dl class="simple" id="t">
-<dt><strong>-T</strong>[<em>min/max</em>/]<em>inc</em>[<strong>+i</strong>|<strong>n</strong>] |<a class="reference internal" href="#t"><span> <strong>-T</strong></span></a></strong><em>file</em>|<em>list</em></dt><dd><p>Evaluate the best-fit regression model at the equidistant points implied by the arguments.  If only
+<dt><strong>-T</strong>[<em>min/max</em>/]<em>inc</em>[<strong>+i</strong>|<strong>n</strong>] |<a class="reference internal" href="#t"><span><strong>-T</strong></span></a></strong><em>file</em>|<em>list</em></dt><dd><p>Evaluate the best-fit regression model at the equidistant points implied by the arguments.  If only
 <strong>-T</strong><em>inc</em> is given instead we will reset <em>min</em> and <em>max</em> to the extreme <em>x</em>-values for each segment.
 To skip the model evaluation entirely, simply provide <strong>-T</strong>0.
 For details on array creation, see <a class="reference internal" href="#generate-1d-array">Generate 1D Array</a>.</p>
@@ -393,7 +403,7 @@ be flagged as outliers.  To only consider negative or positive <em>z-scores</em>
 </dd>
 </dl>
 <dl class="simple">
-<dt><strong>-i</strong><em>cols</em>[<strong>+l</strong>][<strong>+s</strong><em>scale</em>][<strong>+o</strong><em>offset</em>][,<em>…</em>][,<strong>t</strong>[<em>word</em>]] <a class="reference internal" href="gmt.html#icols-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Select input columns and transformations (0 is first column, <strong>t</strong> is trailing text, append <em>word</em> to read one word only).</p>
+<dt><strong>-i</strong><em>cols</em>[<strong>+l</strong>][<strong>+d</strong><em>divide</em>][<strong>+s</strong><em>scale</em>][<strong>+o</strong><em>offset</em>][,<em>…</em>][,<strong>t</strong>[<em>word</em>]] <a class="reference internal" href="gmt.html#icols-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Select input columns and transformations (0 is first column, <strong>t</strong> is trailing text, append <em>word</em> to read one word only).</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -402,6 +412,10 @@ be flagged as outliers.  To only consider negative or positive <em>z-scores</em>
 </dl>
 <dl class="simple">
 <dt><strong>-q</strong>[<strong>i</strong>|<strong>o</strong>][~]<em>rows</em>[<strong>+c</strong><em>col</em>][<strong>+a</strong>|<strong>f</strong>|<strong>s</strong>] <a class="reference internal" href="gmt.html#q-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Select input or output rows or data range(s) [all].</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt><strong>-wy</strong>|<strong>a</strong>|<strong>w</strong>|<strong>d</strong>|<strong>h</strong>|<strong>m</strong>|<strong>s</strong>|<strong>c</strong><em>period</em>[/<em>phase</em>][<strong>+c</strong><em>col</em>] <a class="reference internal" href="gmt.html#w-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Convert an input coordinate to a cyclical coordinate.</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -507,7 +521,7 @@ Fibonacci numbers:</p>
 <p>If you only want a <em>single</em> value
 then you must append a comma to distinguish the list from the setting of <em>inc</em>.</p>
 <p>If the module allows you to set up an absolute time series, append a valid time unit from the list
-<strong>y</strong>ear, m<strong>o</strong>nth, <strong>w</strong>eek, <strong>d</strong>ay, <strong>h</strong>our, <strong>m</strong>inute, and <strong>s</strong>econd
+<strong>y</strong>ear, m<strong>o</strong>nth, <strong>d</strong>ay, <strong>h</strong>our, <strong>m</strong>inute, and <strong>s</strong>econd
 to the given increment; add <strong>+t</strong> to ensure time column (or use <strong>-f</strong>). <strong>Note</strong>: The internal time
 unit is still controlled independently by <a class="reference internal" href="gmt.conf.html#term-TIME_UNIT"><span class="xref std std-term">TIME_UNIT</span></a>.  The first 7 days of March 2020:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt math -o0 -T2020-03-01T/2020-03-07T/1d <span class="nv">T</span> <span class="o">=</span>
@@ -640,9 +654,9 @@ equations for the slope, intercept, and standard errors of the best straight lin
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, The GMT Team.
+        &copy; Copyright 2021, The GMT Team.
       <span class="lastupdated">
-        Last updated on Dec 02, 2020.
+        Last updated on Mar 09, 2021.
       </span>
 
     </p>

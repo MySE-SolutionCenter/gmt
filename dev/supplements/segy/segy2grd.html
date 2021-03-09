@@ -14,6 +14,11 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
 
   
@@ -33,8 +38,10 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -132,6 +139,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../debug.html">Debugging GMT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">GMT C API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../postscriptlight.html">PostScriptLight C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devdocs.html">Developer Documentation</a></li>
 </ul>
 
             
@@ -224,17 +232,17 @@
 <p>Converting SEGY data to a grid</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><strong>gmt segy2grd</strong> <em>segyfile</em> <a class="reference internal" href="#g"><span> <strong>-G</strong></span></a></strong><em>grdfile</em>
-<a class="reference internal" href="#i"><span> <strong>-I</strong></span></a></strong><em>increment</em>
-<a class="reference internal" href="#r"><span> <strong>-R</strong></span></a></strong><em>region</em>
-[ <a class="reference internal" href="#a"><span> <strong>-A</strong></span></a></strong>[<strong>n</strong>|<strong>z</strong>] ]
-[ <a class="reference internal" href="#d"><span> <strong>-D</strong></span></a></strong>[<strong>+x</strong><em>xname</em>][<strong>+y</strong><em>yname</em>][<strong>+z</strong><em>zname</em>][<strong>+s</strong><em>scale</em>][<strong>+o</strong><em>offset</em>][<strong>+n</strong><em>invalid</em>][<strong>+t</strong><em>title</em>][<strong>+r</strong><em>remark</em>] ]
-[ <a class="reference internal" href="#l"><span> <strong>-L</strong></span></a></strong>[<em>nsamp</em>] ]
-[ <a class="reference internal" href="#m"><span> <strong>-M</strong></span></a></strong>[<em>ntraces</em>] ]
-[ <a class="reference internal" href="#n"><span> <strong>-N</strong></span></a></strong><em>nodata</em> ]
-[ <a class="reference internal" href="#q"><span> <strong>-Q</strong></span></a></strong><em>&lt;mode&gt;&lt;value&gt;</em> ]
-[ <a class="reference internal" href="#s"><span> <strong>-S</strong></span></a></strong>[<em>header</em>] ]
-[ <a class="reference internal" href="#v"><span> <strong>-V</strong></span></a></strong>[<em>level</em>] ]
+<p><strong>gmt segy2grd</strong> <em>segyfile</em> <a class="reference internal" href="#g"><span><strong>-G</strong></span></a></strong><em>grdfile</em>
+<a class="reference internal" href="#i"><span><strong>-I</strong></span></a></strong><em>increment</em>
+<a class="reference internal" href="#r"><span><strong>-R</strong></span></a></strong><em>region</em>
+[ <a class="reference internal" href="#a"><span><strong>-A</strong></span></a></strong>[<strong>n</strong>|<strong>z</strong>] ]
+[ <a class="reference internal" href="#d"><span><strong>-D</strong></span></a></strong>[<strong>+x</strong><em>xname</em>][<strong>+y</strong><em>yname</em>][<strong>+z</strong><em>zname</em>][<strong>+s</strong><em>scale</em>][<strong>+o</strong><em>offset</em>][<strong>+n</strong><em>invalid</em>][<strong>+t</strong><em>title</em>][<strong>+r</strong><em>remark</em>] ]
+[ <a class="reference internal" href="#l"><span><strong>-L</strong></span></a></strong>[<em>nsamp</em>] ]
+[ <a class="reference internal" href="#m"><span><strong>-M</strong></span></a></strong>[<em>ntraces</em>] ]
+[ <a class="reference internal" href="#n"><span><strong>-N</strong></span></a></strong><em>nodata</em> ]
+[ <a class="reference internal" href="#q"><span><strong>-Q</strong></span></a></strong><em>&lt;mode&gt;&lt;value&gt;</em> ]
+[ <a class="reference internal" href="#s"><span><strong>-S</strong></span></a></strong>[<em>header</em>] ]
+[ <a class="reference internal" href="#v"><span><strong>-V</strong></span></a></strong>[<em>level</em>] ]
 [ <strong>-bi</strong><a class="reference internal" href="../../gmt.html#bi-full"><span class="std std-ref">binary</span></a> ]
 [ <strong>-:</strong>[<strong>i</strong>|<strong>o</strong>] ]
 [ <strong>--PAR</strong>=<em>value</em> ]</p>
@@ -312,9 +320,10 @@ calculate mean value]. Not used for simple mapping.</p>
 </dd>
 </dl>
 <dl class="simple" id="d">
-<dt><strong>-D</strong>[<strong>+x</strong><em>xname</em>][<strong>+y</strong><em>yname</em>][<strong>+z</strong><em>zname</em>][<strong>+s</strong><em>scale</em>][<strong>+o</strong><em>offset</em>][<strong>+n</strong><em>invalid</em>][<strong>+t</strong><em>title</em>][<strong>+r</strong><em>remark</em>]</dt><dd><p>Give one or more combinations for values <em>xname</em>, <em>yname</em>, <em>zname</em> (give the names of those variables
-and in square bracket their units, e.g., “distance [km]”), <em>scale</em> (to multiply grid values after
-read [normally 1]), <em>offset</em> (to add to grid after scaling [normally 0]),
+<dt><strong>-D</strong>[<strong>+x</strong><em>xname</em>][<strong>+y</strong><em>yname</em>][<strong>+z</strong><em>zname</em>][<strong>+d</strong><em>vname</em>][<strong>+s</strong><em>scale</em>][<strong>+o</strong><em>offset</em>][<strong>+n</strong><em>invalid</em>][<strong>+t</strong><em>title</em>][<strong>+r</strong><em>remark</em>][<strong>+v</strong><em>varname</em>]</dt><dd><p>Give one or more combinations for values <em>xname</em>, <em>yname</em>, <em>zname</em> (3rd dimension in cube),
+and <em>dname</em> (data value name) and give the names of those variables
+and in square bracket their units, e.g., “distance [km]”), <em>scale</em> (to multiply data values after
+read [normally 1]), <em>offset</em> (to add to data after scaling [normally 0]),
 <em>invalid</em> (a value to represent missing data [NaN]), <em>title</em> (anything you
 like), and <em>remark</em> (anything you like). Items not listed will remain untouched.
 Give a blank name to completely reset a particular string.
@@ -323,7 +332,9 @@ you need to escape them (place a backslash before each plus-sign) so they are no
 option modifiers.  Alternatively, you can place the entire double-quoted string inside single
 quotes.  If you have shell variables that contain plus symbols you cannot use single quotes but
 you can escape the plus symbols in a variable using constructs like ${variable/+/\+}.
-Note that for geographic grids (<strong>-fg</strong>) <em>xname</em> and <em>yname</em> are set automatically.</p>
+Note that for geographic grids and cubes (<strong>-fg</strong>) <em>xname</em> and <em>yname</em> are set automatically.
+Normally, the data netCDF variable is called “z” (grid) or “cube” (data cube). You can name this
+netCDF variable via <strong>+v</strong><em>varname</em>.</p>
 </dd>
 </dl>
 <dl class="simple" id="l">
@@ -426,9 +437,9 @@ individual samples will be averaged in bins</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, The GMT Team.
+        &copy; Copyright 2021, The GMT Team.
       <span class="lastupdated">
-        Last updated on Dec 02, 2020.
+        Last updated on Mar 09, 2021.
       </span>
 
     </p>

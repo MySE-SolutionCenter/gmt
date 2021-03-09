@@ -61,7 +61,7 @@ Required Arguments
 
 *outgrid*
     The name of a 2-D grid file that will hold the final result. (See
-    GRID FILE FORMATS below).
+    :ref:`Grid File Formats <grd_inout_full>`).
 
 Optional Arguments
 ------------------
@@ -741,8 +741,6 @@ Notes On Operators
 
 .. include:: explain_float.rst_
 
-.. include:: explain_grd_inout_short.rst_
-
 .. include:: explain_grd_coord.rst_
 
 .. include:: explain_sto_rcl_clr.rst_
@@ -826,7 +824,7 @@ per node of all the grids matching the name model_*.grd using::
 
 To create a geotiff with resolution 0.5x0.5 degrees with distances in km from the coast line, use::
 
-    grdmath -RNO,IS -Dc -I.5 LDISTG = distance.tif=gd:GTIFF
+    gmt grdmath -RNO,IS -Dc -I.5 LDISTG = distance.tif=gd:GTIFF
 
 References
 ----------

@@ -14,6 +14,11 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
 
   
@@ -33,8 +38,10 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -132,6 +139,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../debug.html">Debugging GMT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">GMT C API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../postscriptlight.html">PostScriptLight C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devdocs.html">Developer Documentation</a></li>
 </ul>
 
             
@@ -224,14 +232,14 @@
 <p>Extract a subset from an img file in Mercator or Geographic format</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><strong>gmt img2grd</strong> <em>imgfile</em> <a class="reference internal" href="#g"><span> <strong>-G</strong></span></a></strong><em>grdfile</em>
-<a class="reference internal" href="#r"><span> <strong>-R</strong></span></a></strong><em>region</em>
-[ <a class="reference internal" href="#d"><span> <strong>-D</strong></span></a></strong>[<em>minlat/maxlat</em>] ] [ <a class="reference internal" href="#e"><span> <strong>-E</strong></span></a></strong> ] [ <a class="reference internal" href="#i"><span> <strong>-I</strong></span></a></strong><em>inc</em> ]
-[ <a class="reference internal" href="#f"><span> <strong>-F</strong></span></a></strong> ]
-[ <a class="reference internal" href="#m"><span> <strong>-M</strong></span></a></strong> ] [ <a class="reference internal" href="#n"><span> <strong>-N</strong></span></a></strong><em>navg</em> ] [ <a class="reference internal" href="#s"><span> <strong>-S</strong></span></a></strong>[<em>scale</em>] ]
-[ <a class="reference internal" href="#t"><span> <strong>-T</strong></span></a></strong><em>type</em> ]
-[ <a class="reference internal" href="#v"><span> <strong>-V</strong></span></a></strong>[<em>level</em>] ]
-[ <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong><em>maxlon</em> ]
+<p><strong>gmt img2grd</strong> <em>imgfile</em> <a class="reference internal" href="#g"><span><strong>-G</strong></span></a></strong><em>grdfile</em>
+<a class="reference internal" href="#r"><span><strong>-R</strong></span></a></strong><em>region</em>
+[ <a class="reference internal" href="#d"><span><strong>-D</strong></span></a></strong>[<em>minlat/maxlat</em>] ] [ <a class="reference internal" href="#e"><span><strong>-E</strong></span></a></strong> ] [ <a class="reference internal" href="#i"><span><strong>-I</strong></span></a></strong><em>inc</em> ]
+[ <a class="reference internal" href="#f"><span><strong>-F</strong></span></a></strong> ]
+[ <a class="reference internal" href="#m"><span><strong>-M</strong></span></a></strong> ] [ <a class="reference internal" href="#n"><span><strong>-N</strong></span></a></strong><em>navg</em> ] [ <a class="reference internal" href="#s"><span><strong>-S</strong></span></a></strong>[<em>scale</em>] ]
+[ <a class="reference internal" href="#t"><span><strong>-T</strong></span></a></strong><em>type</em> ]
+[ <a class="reference internal" href="#v"><span><strong>-V</strong></span></a></strong>[<em>level</em>] ]
+[ <a class="reference internal" href="#w"><span><strong>-W</strong></span></a></strong><em>maxlon</em> ]
 [ <strong>-n</strong><a class="reference internal" href="../../gmt.html#n-full"><span class="std std-ref">flags</span></a> ]
 [ <strong>--PAR</strong>=<em>value</em> ]</p>
 <p><strong>Note:</strong> No space is allowed between the option flag and the associated arguments.</p>
@@ -522,7 +530,7 @@ shaded relief map like this:</p>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt begin
   gmt grdimage merc_grav_2.nc -Iillum.nc -Cgrav.cpt -Jx0.1i
   gmt basemap -R-40/40/-70.023256525/-29.9368261101 -Jm0.1i -Ba10
-gmtend
+gmt end
 </pre></div>
 </div>
 </div></blockquote>
@@ -558,9 +566,9 @@ eliminate NaNs, and pipe through <a class="reference internal" href="../../mappr
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, The GMT Team.
+        &copy; Copyright 2021, The GMT Team.
       <span class="lastupdated">
-        Last updated on Dec 02, 2020.
+        Last updated on Mar 09, 2021.
       </span>
 
     </p>

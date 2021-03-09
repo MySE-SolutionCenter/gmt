@@ -14,6 +14,11 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="_static/style.css" type="text/css" />
 
   
@@ -33,8 +38,10 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/togglebutton.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -132,6 +139,7 @@
 <li class="toctree-l1"><a class="reference internal" href="debug.html">Debugging GMT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">GMT C API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="postscriptlight.html">PostScriptLight C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devdocs.html">Developer Documentation</a></li>
 </ul>
 
             
@@ -224,23 +232,27 @@
 <p>List current GMT default settings</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><strong>gmt defaults</strong> [ <a class="reference internal" href="#d"><span> <strong>-D</strong></span></a></strong>[<strong>u</strong>|<strong>s</strong>] ]</p>
+<p><strong>gmt defaults</strong> [ <a class="reference internal" href="#d"><span><strong>-D</strong></span></a></strong>[<strong>u</strong>|<strong>s</strong>] ]</p>
 <p><strong>Note:</strong> No space is allowed between the option flag and the associated arguments.</p>
 </div>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p><strong>defaults</strong> lists all the GMT parameter defaults if the option
-<strong>-D</strong> is used. There are three ways to change some of the settings: (1)
-Use the command <a class="reference internal" href="gmtset.html"><span class="doc">gmtset</span></a>, (2) in classic mode you may use any text editor to edit the file
-<a class="reference internal" href="gmt.conf.html"><span class="doc">gmt.conf</span></a> in your home, ~/.gmt or current directory (if you do not
-have this file, run <a class="reference internal" href="gmtset.html"><span class="doc">gmtset</span></a> <strong>-D</strong> to get one with the system default
-settings), or (3) override any parameter by specifying one
-or more <strong>-</strong><strong>-PARAMETER</strong>=<em>VALUE</em> statements on the command line of any
-GMT command (<strong>PARAMETER</strong> and <em>VALUE</em> are any combination listed
-below). The first two options are permanent changes until explicitly
-changed back, while the last option is ephemeral and only applies to the
-single GMT command that received the override. GMT can provide
-default values in US or SI units. This choice is determined at compile time.</p>
+<p><strong>defaults</strong> lists all the GMT parameter defaults if the option <strong>-D</strong> is used.
+There are three ways to change some of the settings: (1) use the command
+<a class="reference internal" href="gmtset.html"><span class="doc">gmtset</span></a>, (2) use any text editor to edit the file <a class="reference internal" href="gmt.conf.html"><span class="doc">gmt.conf</span></a> in your
+home, ~/.gmt or current directory (if you do not have this file, run
+<a class="reference internal" href="#"><span class="doc">gmtdefaults</span></a> <strong>-D</strong> &gt; gmt.conf to get one with the system default
+settings), or (3) override any parameter by specifying one or more
+<strong>-</strong><strong>-PARAMETER</strong>=<em>VALUE</em> statements on the command line of any GMT
+command (<strong>PARAMETER</strong> and <em>VALUE</em> are any combination in <a class="reference internal" href="gmt.conf.html"><span class="doc">gmt.conf</span></a>). In
+modern mode, settings can be reset to GMT defaults using <a class="reference internal" href="clear.html"><span class="doc">clear</span></a>. Changes
+made using <a class="reference internal" href="gmtset.html"><span class="doc">gmtset</span></a> are permanent until explicitly changed back in classic
+mode and are in effect for the duration of the current session in modern mode.
+Manual changes to the <a class="reference internal" href="gmt.conf.html"><span class="doc">gmt.conf</span></a> file (option 2) are in effect until
+explicitly changed back, or can be ignored for a modern mode session using the
+<strong>-C</strong> argument of the <a class="reference internal" href="begin.html"><span class="doc">begin</span></a> module. Option 3 is ephemeral and only
+applies to the single GMT command that received the override. GMT can provide
+default values in US or SI units based on the choice determined at compile time.</p>
 </div>
 <div class="section" id="required-arguments">
 <h2>Required Arguments<a class="headerlink" href="#required-arguments" title="Permalink to this headline">¶</a></h2>
@@ -323,9 +335,9 @@ parameters will be used.</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, The GMT Team.
+        &copy; Copyright 2021, The GMT Team.
       <span class="lastupdated">
-        Last updated on Dec 02, 2020.
+        Last updated on Mar 09, 2021.
       </span>
 
     </p>

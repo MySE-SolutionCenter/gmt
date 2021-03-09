@@ -14,6 +14,11 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
 
   
@@ -33,8 +38,10 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -132,6 +139,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../debug.html">Debugging GMT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">GMT C API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../postscriptlight.html">PostScriptLight C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devdocs.html">Developer Documentation</a></li>
 </ul>
 
             
@@ -225,14 +233,14 @@
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <p><strong>gmt x2sys_datalist</strong> <em>track(s)</em> <strong>-T</strong><em>TAG</em>
-[ <a class="reference internal" href="#a"><span> <strong>-A</strong></span></a></strong> ]
-[ <a class="reference internal" href="#e"><span> <strong>-E</strong></span></a></strong> ]
-[ <a class="reference internal" href="#f"><span> <strong>-F</strong></span></a></strong><em>name1</em>,<em>name2</em>,… ]
-[ <a class="reference internal" href="#i"><span> <strong>-I</strong></span></a></strong>[<em>list</em>] ]
-[ <a class="reference internal" href="#l"><span> <strong>-L</strong></span></a></strong>[<em>corrtable</em>] ]
-[ <a class="reference internal" href="#r"><span> <strong>-R</strong></span></a></strong><em>region</em> ]
-[ <a class="reference internal" href="#s"><span> <strong>-S</strong></span></a></strong> ] [
-[ <a class="reference internal" href="#v"><span> <strong>-V</strong></span></a></strong>[<em>level</em>] ]
+[ <a class="reference internal" href="#a"><span><strong>-A</strong></span></a></strong> ]
+[ <a class="reference internal" href="#e"><span><strong>-E</strong></span></a></strong> ]
+[ <a class="reference internal" href="#f"><span><strong>-F</strong></span></a></strong><em>name1</em>,<em>name2</em>,… ]
+[ <a class="reference internal" href="#i"><span><strong>-I</strong></span></a></strong>[<em>list</em>] ]
+[ <a class="reference internal" href="#l"><span><strong>-L</strong></span></a></strong>[<em>corrtable</em>] ]
+[ <a class="reference internal" href="#r"><span><strong>-R</strong></span></a></strong><em>region</em> ]
+[ <a class="reference internal" href="#s"><span><strong>-S</strong></span></a></strong> ] [
+[ <a class="reference internal" href="#v"><span><strong>-V</strong></span></a></strong>[<em>level</em>] ]
 [ <strong>-bo</strong><a class="reference internal" href="../../gmt.html#bo-full"><span class="std std-ref">binary</span></a> ]
 [ <strong>-do</strong><a class="reference internal" href="../../gmt.html#do-full"><span class="std std-ref">nodata</span></a> ]
 [ <strong>-h</strong><a class="reference internal" href="../../gmt.html#h-full"><span class="std std-ref">headers</span></a> ]
@@ -243,7 +251,7 @@
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p><strong>x2sys_datalist</strong> reads one or more files and produces a single ASCII
 [or binary] table. The files can be of any format; this information is
-encoded in the TAG set with the <a class="reference internal" href="#t"><span> <strong>-T</strong></span></a></strong> option. You may limit the output to
+encoded in the TAG set with the <a class="reference internal" href="#t"><span><strong>-T</strong></span></a></strong> option. You may limit the output to
 a geographic region, and insist that the output from several files be
 separated by a multiple segment header. Only the named data fields will
 be output [Default selects all columns].</p>
@@ -473,9 +481,9 @@ reduced by a linear distance term:</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, The GMT Team.
+        &copy; Copyright 2021, The GMT Team.
       <span class="lastupdated">
-        Last updated on Dec 02, 2020.
+        Last updated on Mar 09, 2021.
       </span>
 
     </p>

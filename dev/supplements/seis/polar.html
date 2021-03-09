@@ -14,6 +14,11 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
 
   
@@ -33,7 +38,10 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
@@ -132,6 +140,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../debug.html">Debugging GMT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">GMT C API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../postscriptlight.html">PostScriptLight C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devdocs.html">Developer Documentation</a></li>
 </ul>
 
             
@@ -224,23 +233,25 @@
 <p>Plot polarities on the lower hemisphere of the focal sphere</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><strong>gmt polar</strong> [ <em>table</em> ] <a class="reference internal" href="#d"><span> <strong>-D</strong></span></a></strong><em>lon/lat</em> <a class="reference internal" href="#j"><span> <strong>-J</strong></span></a></strong><em>parameters</em>
-<a class="reference internal" href="#r"><span> <strong>-R</strong></span></a></strong><em>region</em>
-<a class="reference internal" href="#m"><span> <strong>-M</strong></span></a></strong><em>size</em>[<strong>+m</strong><em>mag</em>]
-<a class="reference internal" href="#s"><span> <strong>-S</strong></span></a></strong><em>&lt;symbol&gt;&lt;size&gt;</em>
-[ <a class="reference internal" href="#b"><span> <strong>-B</strong></span></a></strong>[<strong>p</strong>|<strong>s</strong>]<em>parameters</em> ]
-[ <a class="reference internal" href="#c"><span> <strong>-C</strong></span></a></strong><em>lon</em>/<em>lat</em>[<strong>+p</strong><em>pen</em>][<strong>+s</strong><em>pointsize</em>] ]
-[ <a class="reference internal" href="#e"><span> <strong>-E</strong></span></a></strong><em>fill</em> ]
-[ <a class="reference internal" href="#f"><span> <strong>-F</strong></span></a></strong><em>fill</em> ]
-[ <a class="reference internal" href="#g"><span> <strong>-G</strong></span></a></strong><em>fill</em> ]
-[ <a class="reference internal" href="#n"><span> <strong>-N</strong></span></a></strong> ]
-[ <a class="reference internal" href="#q"><span> <strong>-Q</strong></span></a></strong><em>mode</em>[<em>args</em>] ]
-[ <a class="reference internal" href="#t"><span> <strong>-T</strong></span></a></strong>[<strong>+a</strong><em>angle</em>][<strong>+f</strong><em>font</em>][<strong>+j</strong><em>justify</em>][<strong>+o</strong><em>dx</em>[/<em>dy</em>]] ]
-[ <a class="reference internal" href="#u"><span> <strong>-U</strong></span></a></strong>[<em>stamp</em>] ]
-[ <a class="reference internal" href="#v"><span> <strong>-V</strong></span></a></strong>[<em>level</em>] ]
-[ <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong><em>pen</em> ]
-[ <a class="reference internal" href="#x"><span> <strong>-X</strong></span></a></strong>[<strong>a</strong>|<strong>c</strong>|<strong>f</strong>|<strong>r</strong>][<em>xshift</em>] ]
-[ <a class="reference internal" href="#y"><span> <strong>-Y</strong></span></a></strong>[<strong>a</strong>|<strong>c</strong>|<strong>f</strong>|<strong>r</strong>][<em>yshift</em>] ]
+<p><strong>gmt polar</strong>
+[ <em>table</em> ]
+<a class="reference internal" href="#d"><span><strong>-D</strong></span></a></strong><em>lon/lat</em>
+<a class="reference internal" href="#j"><span><strong>-J</strong></span></a></strong><em>parameters</em>
+<a class="reference internal" href="#r"><span><strong>-R</strong></span></a></strong><em>region</em>
+<a class="reference internal" href="#m"><span><strong>-M</strong></span></a></strong><em>size</em>[<strong>+m</strong><em>mag</em>]
+<a class="reference internal" href="#s"><span><strong>-S</strong></span></a></strong><em>&lt;symbol&gt;&lt;size&gt;</em>
+[ <a class="reference internal" href="#b"><span><strong>-B</strong></span></a></strong>[<strong>p</strong>|<strong>s</strong>]<em>parameters</em> ]
+[ <a class="reference internal" href="#e"><span><strong>-E</strong></span></a></strong><em>fill</em> ]
+[ <a class="reference internal" href="#f"><span><strong>-F</strong></span></a></strong><em>fill</em> ]
+[ <a class="reference internal" href="#g"><span><strong>-G</strong></span></a></strong><em>fill</em> ]
+[ <a class="reference internal" href="#n"><span><strong>-N</strong></span></a></strong> ]
+[ <a class="reference internal" href="#q"><span><strong>-Q</strong></span></a></strong><em>mode</em>[<em>args</em>] ]
+[ <a class="reference internal" href="#t"><span><strong>-T</strong></span></a></strong>[<strong>+a</strong><em>angle</em>][<strong>+f</strong><em>font</em>][<strong>+j</strong><em>justify</em>][<strong>+o</strong><em>dx</em>[/<em>dy</em>]] ]
+[ <a class="reference internal" href="#u"><span><strong>-U</strong></span></a></strong>[<em>stamp</em>] ]
+[ <a class="reference internal" href="#v"><span><strong>-V</strong></span></a></strong>[<em>level</em>] ]
+[ <a class="reference internal" href="#w"><span><strong>-W</strong></span></a></strong><em>pen</em> ]
+[ <a class="reference internal" href="#x"><span><strong>-X</strong></span></a></strong>[<strong>a</strong>|<strong>c</strong>|<strong>f</strong>|<strong>r</strong>][<em>xshift</em>] ]
+[ <a class="reference internal" href="#y"><span><strong>-Y</strong></span></a></strong>[<strong>a</strong>|<strong>c</strong>|<strong>f</strong>|<strong>r</strong>][<em>yshift</em>] ]
 [ <strong>-di</strong><a class="reference internal" href="../../gmt.html#di-full"><span class="std std-ref">nodata</span></a> ]
 [ <strong>-e</strong><a class="reference internal" href="../../gmt.html#e-full"><span class="std std-ref">regexp</span></a> ]
 [ <strong>-h</strong><a class="reference internal" href="../../gmt.html#h-full"><span class="std std-ref">headers</span></a> ]
@@ -253,13 +264,15 @@
 </div>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>Reads data values from <em>files</em> [or standard input] and
-will plot stations on focal mechanisms
-on a map.</p>
+<p>Plot observations from a single earthquake observed at various stations
+at different azimuths and distances on the lower hemisphere of the focal
+sphere.  The focal sphere is typically plotted at the location of the earthquake,
+specified via <strong>-D</strong>. Reads data values from <em>files</em> [or standard input].</p>
 <p>Parameters are expected to be in the following columns:</p>
 <blockquote>
 <div><dl class="simple">
-<dt><strong>1</strong>,<strong>2</strong>,<strong>3</strong>:</dt><dd><p>station_code, azimuth, take-off angle</p>
+<dt><strong>1</strong>,<strong>2</strong>,<strong>3</strong>:</dt><dd><p><em>station-code azimuth take-off-angle</em>
+(all three columns must contain numerical values)</p>
 </dd>
 <dt><strong>4</strong>:</dt><dd><p>polarity:</p>
 <ul class="simple">
@@ -279,8 +292,19 @@ table file(s) holding a number of data columns. If no tables are given
 then we read from standard input.  </p>
 </dd>
 </dl>
+<dl class="simple" id="d">
+<dt><strong>-D</strong><em>lon/lat</em></dt><dd><p>Centers the focal sphere at given longitude and latitude point on the map.</p>
+</dd>
+</dl>
 <span class="target" id="j"></span><dl class="simple">
 <dt><strong>-J</strong><em>parameters</em> <a class="reference internal" href="../../gmt.html#j-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Select map projection.  </p>
+</dd>
+</dl>
+<dl class="simple" id="m">
+<dt><strong>-M</strong><em>size</em>[<strong>+m</strong><em>mag</em>]</dt><dd><p>Sets the size of the focal sphere to plot polarities in. <em>size</em> is in
+default units (unless <strong>c</strong>, <strong>i</strong>, or <strong>p</strong> is appended).
+Optionally append <strong>+m</strong><em>mag</em> to specify its magnitude,
+then focal sphere size is <em>mag</em> / 5.0 * <em>size</em>.</p>
 </dd>
 </dl>
 <span class="target" id="r"></span><dl class="simple">
@@ -322,17 +346,6 @@ done only when using the <strong>-Jz</strong> option, not when using only the
 plotted, with no third dimension.  </p>
 </dd>
 </dl>
-<dl class="simple" id="d">
-<dt><strong>-D</strong><em>longitude/latitude</em></dt><dd><p>Maps the bubble at given longitude and latitude point.</p>
-</dd>
-</dl>
-<dl class="simple" id="m">
-<dt><strong>-M</strong><em>size</em>[<strong>+m</strong><em>mag</em>]</dt><dd><p>Sets the size of the beach ball to plot polarities in. <em>size</em> is in
-default units (unless <strong>c</strong>, <strong>i</strong>, or <strong>p</strong> is appended).
-Optionally append <strong>+m</strong><em>mag</em> to specify its magnitude,
-then beachball size is <em>mag</em> / 5.0 * <em>size</em>.</p>
-</dd>
-</dl>
 <dl class="simple" id="s">
 <dt><strong>-S</strong><em>&lt;symbol_type&gt;&lt;size&gt;</em></dt><dd><p>Selects <em>symbol_type</em> and symbol <em>size</em>. Size is in default units (unless
 <strong>c</strong>, <strong>i</strong>, or <strong>p</strong> is appended). Choose symbol type from
@@ -347,12 +360,6 @@ triangle, (<em>p</em>)oint, (<em>s</em>)quare, (<em>t</em>)riangle, (<em>x</em>)
 <dt><strong>-B</strong>[<strong>p</strong>|<strong>s</strong>]<em>parameters</em> <a class="reference internal" href="../../gmt.html#b-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Set map boundary frame and axes attributes.</p>
 </dd>
 </dl>
-<dl class="simple" id="c">
-<dt><strong>-C</strong><em>lon</em>/<em>lat</em>[<strong>+p</strong><em>pen</em>][<strong>+s</strong><em>pointsize</em>]</dt><dd><p>Offsets focal mechanisms to the latitude and longitude specified in
-the last two columns of the input file.  Optionally set the pen and
-symbol point size.</p>
-</dd>
-</dl>
 <dl class="simple" id="e">
 <dt><strong>-E</strong><em>fill</em> <a class="reference internal" href="../../cookbook/features.html#gfill-attrib"><span class="std std-ref">(more …)</span></a></dt><dd><p>Selects filling of symbols for stations in extensive quadrants. Set
 the color [Default is 250]. If <strong>-E</strong><em>fill</em> is the same as
@@ -360,7 +367,7 @@ the color [Default is 250]. If <strong>-E</strong><em>fill</em> is the same as
 </dd>
 </dl>
 <dl class="simple" id="f">
-<dt><strong>-F</strong><em>fill</em> <a class="reference internal" href="../../cookbook/features.html#gfill-attrib"><span class="std std-ref">(more …)</span></a></dt><dd><p>Sets background color of the beach ball. Default is no fill.</p>
+<dt><strong>-F</strong><em>fill</em> <a class="reference internal" href="../../cookbook/features.html#gfill-attrib"><span class="std std-ref">(more …)</span></a></dt><dd><p>Sets background color of the focal sphere. Default is no fill.</p>
 </dd>
 </dl>
 <dl class="simple" id="g">
@@ -375,11 +382,11 @@ Set the color [Default is black].</p>
 <dl id="q">
 <dt><strong>-Q</strong><em>mode</em>[<em>args</em>]</dt><dd><p>Sets one or more attributes; repeatable. The various combinations are</p>
 <dl class="simple">
-<dt><strong>-Qe</strong>[pen]</dt><dd><p>Outline symbols in extensive quadrants using <em>pen</em> or the default pen (see <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong>).</p>
+<dt><strong>-Qe</strong>[pen]</dt><dd><p>Outline symbols in extensive quadrants using <em>pen</em> or the default pen (see <a class="reference internal" href="#w"><span><strong>-W</strong></span></a></strong>).</p>
 </dd>
-<dt><strong>-Qf</strong>[pen]</dt><dd><p>Outline the beach ball using <em>pen</em> or the default pen (see <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong>).</p>
+<dt><strong>-Qf</strong>[pen]</dt><dd><p>Outline the focal sphere using <em>pen</em> or the default pen (see <a class="reference internal" href="#w"><span><strong>-W</strong></span></a></strong>).</p>
 </dd>
-<dt><strong>-Qg</strong>[pen]</dt><dd><p>Outline symbols in compressional quadrants using <em>pen</em> or the default pen (see <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong>).</p>
+<dt><strong>-Qg</strong>[pen]</dt><dd><p>Outline symbols in compressional quadrants using <em>pen</em> or the default pen (see <a class="reference internal" href="#w"><span><strong>-W</strong></span></a></strong>).</p>
 </dd>
 <dt><strong>-Qh</strong></dt><dd><p>Use special format derived from HYPO71 output</p>
 </dd>
@@ -389,7 +396,7 @@ default to <strong>+v</strong>0.3i+e+gblack [Default is a line segment].
 Give <em>half-size</em> in default units (unless <strong>c</strong>, <strong>i</strong>, or <strong>p</strong> is appended).
 See <a class="reference internal" href="#vector-attributes">Vector Attributes</a> for specifying additional attributes.</p>
 </dd>
-<dt><strong>-Qt</strong><em>pen</em></dt><dd><p>Set pen color to write station code. Default uses the default pen (see <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong>).</p>
+<dt><strong>-Qt</strong><em>pen</em></dt><dd><p>Set pen color to write station code. Default uses the default pen (see <a class="reference internal" href="#w"><span><strong>-W</strong></span></a></strong>).</p>
 </dd>
 </dl>
 </dd>
@@ -416,7 +423,7 @@ append <strong>+o</strong> to offset the text string by <em>dx</em>/<em>dy</em>.
 </dd>
 </dl>
 <p id="x"><strong>-X</strong>[<strong>a</strong>|<strong>c</strong>|<strong>f</strong>|<strong>r</strong>][<em>xshift</em>]</p>
-<dl class="simple">
+<dl class="simple" id="y">
 <dt><strong>-Y</strong>[<strong>a</strong>|<strong>c</strong>|<strong>f</strong>|<strong>r</strong>][<em>yshift</em>] <a class="reference internal" href="../../gmt.html#xy-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Shift plot origin.</p>
 </dd>
 </dl>
@@ -429,7 +436,7 @@ append <strong>+o</strong> to offset the text string by <em>dx</em>/<em>dy</em>.
 </dd>
 </dl>
 <dl class="simple">
-<dt><strong>-i</strong><em>cols</em>[<strong>+l</strong>][<strong>+s</strong><em>scale</em>][<strong>+o</strong><em>offset</em>][,<em>…</em>][,<strong>t</strong>[<em>word</em>]] <a class="reference internal" href="../../gmt.html#icols-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Select input columns and transformations (0 is first column, <strong>t</strong> is trailing text, append <em>word</em> to read one word only).</p>
+<dt><strong>-i</strong><em>cols</em>[<strong>+l</strong>][<strong>+d</strong><em>divide</em>][<strong>+s</strong><em>scale</em>][<strong>+o</strong><em>offset</em>][,<em>…</em>][,<strong>t</strong>[<em>word</em>]] <a class="reference internal" href="../../gmt.html#icols-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Select input columns and transformations (0 is first column, <strong>t</strong> is trailing text, append <em>word</em> to read one word only).</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -571,7 +578,7 @@ modern mode <a class="reference internal" href="../../cookbook/one-liner.html"><
 </pre></div>
 </div>
 <p>Use special format derived from HYPO71 output:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt polar -R239/240/34/35.2 -JM8c -N -Sc0.4 -D239.5/34.5 -M5 -Qh -pdf <span class="nb">test</span> <span class="s">&lt;&lt;END</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt polar -R239/240/34/35.2 -JM8c -N -Sc0.4 -D239:30E/34:30N -M5 -Qh -pdf <span class="nb">test</span> <span class="s">&lt;&lt;END</span>
 <span class="s">#Date Or. time stat azim ih</span>
 <span class="s">910223 1 22 0481 11 147 ipu0</span>
 <span class="s">910223 1 22 6185 247 120 ipd0</span>
@@ -625,9 +632,9 @@ Institut de Physique du Globe de Paris, Departement de Sismologie, Paris, France
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, The GMT Team.
+        &copy; Copyright 2021, The GMT Team.
       <span class="lastupdated">
-        Last updated on Dec 02, 2020.
+        Last updated on Mar 09, 2021.
       </span>
 
     </p>

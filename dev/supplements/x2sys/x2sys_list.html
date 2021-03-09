@@ -14,6 +14,11 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
 
   
@@ -33,8 +38,10 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -132,6 +139,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../debug.html">Debugging GMT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">GMT C API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../postscriptlight.html">PostScriptLight C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devdocs.html">Developer Documentation</a></li>
 </ul>
 
             
@@ -224,18 +232,18 @@
 <p>Extract subset from crossover data base</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><strong>gmt x2sys_list</strong> <a class="reference internal" href="#c"><span> <strong>-C</strong></span></a></strong><em>column</em> <a class="reference internal" href="#t"><span> <strong>-T</strong></span></a></strong><em>TAG</em> [ <em>coedbase.txt</em> ]
-[ <a class="reference internal" href="#a"><span> <strong>-A</strong></span></a></strong><em>asymm_max</em> ]
-[ <a class="reference internal" href="#e"><span> <strong>-E</strong></span></a></strong> ]
-[ <a class="reference internal" href="#f"><span> <strong>-F</strong></span></a></strong><em>flags</em> ]
-[ <a class="reference internal" href="#i"><span> <strong>-I</strong></span></a></strong>[<em>list</em>] ]
-[ <a class="reference internal" href="#l"><span> <strong>-L</strong></span></a></strong>[<em>corrtable</em>] ]
-[ <a class="reference internal" href="#n"><span> <strong>-N</strong></span></a></strong><em>nx_min</em>[<strong>+p</strong>] ]
-[ <a class="reference internal" href="#q"><span> <strong>-Q</strong></span></a></strong><strong>e</strong>|<strong>i</strong> ]
-[ <a class="reference internal" href="#r"><span> <strong>-R</strong></span></a></strong><em>region</em> ]
-[ <a class="reference internal" href="#s"><span> <strong>-S</strong></span></a></strong><em>track</em>[<strong>+b</strong>] ]
-[ <a class="reference internal" href="#v"><span> <strong>-V</strong></span></a></strong>[<em>level</em>] ]
-[ <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong>[<em>list</em>] ]
+<p><strong>gmt x2sys_list</strong> <a class="reference internal" href="#c"><span><strong>-C</strong></span></a></strong><em>column</em> <a class="reference internal" href="#t"><span><strong>-T</strong></span></a></strong><em>TAG</em> [ <em>coedbase.txt</em> ]
+[ <a class="reference internal" href="#a"><span><strong>-A</strong></span></a></strong><em>asymm_max</em> ]
+[ <a class="reference internal" href="#e"><span><strong>-E</strong></span></a></strong> ]
+[ <a class="reference internal" href="#f"><span><strong>-F</strong></span></a></strong><em>flags</em> ]
+[ <a class="reference internal" href="#i"><span><strong>-I</strong></span></a></strong>[<em>list</em>] ]
+[ <a class="reference internal" href="#l"><span><strong>-L</strong></span></a></strong>[<em>corrtable</em>] ]
+[ <a class="reference internal" href="#n"><span><strong>-N</strong></span></a></strong><em>nx_min</em>[<strong>+p</strong>] ]
+[ <a class="reference internal" href="#q"><span><strong>-Q</strong></span></a></strong><strong>e</strong>|<strong>i</strong> ]
+[ <a class="reference internal" href="#r"><span><strong>-R</strong></span></a></strong><em>region</em> ]
+[ <a class="reference internal" href="#s"><span><strong>-S</strong></span></a></strong><em>track</em>[<strong>+b</strong>] ]
+[ <a class="reference internal" href="#v"><span><strong>-V</strong></span></a></strong>[<em>level</em>] ]
+[ <a class="reference internal" href="#w"><span><strong>-W</strong></span></a></strong>[<em>list</em>] ]
 [ <strong>-bo</strong><a class="reference internal" href="../../gmt.html#bo-full"><span class="std std-ref">binary</span></a> ]
 [ <strong>--PAR</strong>=<em>value</em> ]</p>
 <p><strong>Note:</strong> No space is allowed between the option flag and the associated arguments.</p>
@@ -256,15 +264,13 @@ this column name must be present in the crossover data base.</p>
 <dl class="simple">
 <dt><strong>-T</strong><em>TAG</em></dt><dd><p>Specify the x2sys <em>TAG</em> which identifies the attributes of this data type.</p>
 </dd>
-</dl>
-</div>
-<div class="section" id="optional-arguments">
-<h2>Optional Arguments<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
-<dl class="simple">
 <dt><em>coedbase.txt</em></dt><dd><p>The name of the input ASCII crossover error data base as produced by
 <a class="reference internal" href="x2sys_cross.html"><span class="doc">x2sys_cross</span></a>. If not given we read standard input instead.</p>
 </dd>
 </dl>
+</div>
+<div class="section" id="optional-arguments">
+<h2>Optional Arguments<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
 <dl class="simple" id="a">
 <dt><strong>-A</strong><em>asymm_max</em></dt><dd><p>Specifies maximum asymmetry in the distribution of crossovers
 relative to the mid point in time (or distance, if not time is
@@ -471,9 +477,9 @@ format, try</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, The GMT Team.
+        &copy; Copyright 2021, The GMT Team.
       <span class="lastupdated">
-        Last updated on Dec 02, 2020.
+        Last updated on Mar 09, 2021.
       </span>
 
     </p>

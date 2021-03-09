@@ -14,6 +14,11 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="_static/style.css" type="text/css" />
 
   
@@ -33,7 +38,10 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script src="_static/togglebutton.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
@@ -132,6 +140,7 @@
 <li class="toctree-l1"><a class="reference internal" href="debug.html">Debugging GMT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">GMT C API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="postscriptlight.html">PostScriptLight C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devdocs.html">Developer Documentation</a></li>
 </ul>
 
             
@@ -224,21 +233,21 @@
 <p>Grid table data using adjustable tension continuous curvature splines</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><strong>gmt surface</strong> [ <em>table</em> ] <a class="reference internal" href="#g"><span> <strong>-G</strong></span></a></strong><em>outputfile.nc</em>
-<a class="reference internal" href="#i"><span> <strong>-I</strong></span></a></strong><em>increment</em>
-<a class="reference internal" href="#r"><span> <strong>-R</strong></span></a></strong><em>region</em>
-[ <a class="reference internal" href="#a"><span> <strong>-A</strong></span></a></strong><em>aspect_ratio</em>|<strong>m</strong> ]
-[ <a class="reference internal" href="#c"><span> <strong>-C</strong></span></a></strong><em>convergence_limit</em>[%] ]
-[ <a class="reference internal" href="#j"><span> <strong>-J</strong></span></a></strong><em>parameters</em> ]
-[ <a class="reference internal" href="#d"><span> <strong>-D</strong></span></a></strong><em>breakline_file</em>[<strong>+z</strong>[<em>level</em>]] ]
-[ <a class="reference internal" href="#l"><span> <strong>-L</strong></span></a></strong><strong>l</strong><em>lower</em> ] [ <strong>-Lu</strong><em>upper</em> ]
-[ <a class="reference internal" href="#m"><span> <strong>-M</strong></span></a></strong><em>max_radius</em> ]
-[ <a class="reference internal" href="#n"><span> <strong>-N</strong></span></a></strong><em>max_iterations</em> ]
-[ <a class="reference internal" href="#q"><span> <strong>-Q</strong></span></a></strong> ]
-[ <a class="reference internal" href="#s"><span> <strong>-S</strong></span></a></strong><em>search_radius</em>[<strong>m</strong>|<strong>s</strong>] ]
-[ <a class="reference internal" href="#t"><span> <strong>-T</strong></span></a></strong>[<strong>i</strong>|<strong>b</strong>]<em>tension_factor</em> ]
-[ <a class="reference internal" href="#v"><span> <strong>-V</strong></span></a></strong>[<em>level</em>] ]
-[ <a class="reference internal" href="#z"><span> <strong>-Z</strong></span></a></strong><em>over-relaxation_factor</em> ]
+<p><strong>gmt surface</strong> [ <em>table</em> ] <a class="reference internal" href="#g"><span><strong>-G</strong></span></a></strong><em>outputfile.nc</em>
+<a class="reference internal" href="#i"><span><strong>-I</strong></span></a></strong><em>increment</em>
+<a class="reference internal" href="#r"><span><strong>-R</strong></span></a></strong><em>region</em>
+[ <a class="reference internal" href="#a"><span><strong>-A</strong></span></a></strong><em>aspect_ratio</em>|<strong>m</strong> ]
+[ <a class="reference internal" href="#c"><span><strong>-C</strong></span></a></strong><em>convergence_limit</em>[%] ]
+[ <a class="reference internal" href="#j"><span><strong>-J</strong></span></a></strong><em>parameters</em> ]
+[ <a class="reference internal" href="#d"><span><strong>-D</strong></span></a></strong><em>breakline_file</em>[<strong>+z</strong>[<em>level</em>]] ]
+[ <a class="reference internal" href="#l"><span><strong>-L</strong></span></a></strong><strong>l</strong><em>lower</em> ] [ <a class="reference internal" href="#l"><span><strong>-L</strong></span></a></strong><strong>u</strong><em>upper</em> ]
+[ <a class="reference internal" href="#m"><span><strong>-M</strong></span></a></strong><em>max_radius</em> ]
+[ <a class="reference internal" href="#n"><span><strong>-N</strong></span></a></strong><em>max_iterations</em> ]
+[ <a class="reference internal" href="#q"><span><strong>-Q</strong></span></a></strong> ]
+[ <a class="reference internal" href="#s"><span><strong>-S</strong></span></a></strong><em>search_radius</em>[<strong>m</strong>|<strong>s</strong>] ]
+[ <a class="reference internal" href="#t"><span><strong>-T</strong></span></a></strong>[<strong>i</strong>|<strong>b</strong>]<em>tension_factor</em> ]
+[ <a class="reference internal" href="#v"><span><strong>-V</strong></span></a></strong>[<em>level</em>] ]
+[ <a class="reference internal" href="#z"><span><strong>-Z</strong></span></a></strong><em>over-relaxation_factor</em> ]
 [ <strong>-a</strong><a class="reference internal" href="gmt.html#aspatial-full"><span class="std std-ref">flags</span></a> ]
 [ <strong>-bi</strong><a class="reference internal" href="gmt.html#bi-full"><span class="std std-ref">binary</span></a> ]
 [ <strong>-di</strong><a class="reference internal" href="gmt.html#di-full"><span class="std std-ref">nodata</span></a> ]
@@ -248,6 +257,7 @@
 [ <strong>-i</strong><a class="reference internal" href="gmt.html#icols-full"><span class="std std-ref">flags</span></a> ]
 [ <strong>-qi</strong><a class="reference internal" href="gmt.html#qi-full"><span class="std std-ref">flags</span></a> ]
 [ <strong>-r</strong><a class="reference internal" href="gmt.html#nodereg-full"><span class="std std-ref">reg</span></a> ]
+[ <strong>-w</strong><a class="reference internal" href="gmt.html#w-full"><span class="std std-ref">flags</span></a> ]
 [ <strong>-:</strong>[<strong>i</strong>|<strong>o</strong>] ]
 [ <strong>--PAR</strong>=<em>value</em> ]</p>
 <p><strong>Note:</strong> No space is allowed between the option flag and the associated arguments.</p>
@@ -290,8 +300,8 @@ smallest grid dimension must be at least 4.</p>
 </dd>
 </dl>
 <dl class="simple" id="i">
-<dt><strong>-I</strong><em>xinc</em>[<strong>+e</strong>|<strong>n</strong>][/<em>yinc</em>[<strong>+e</strong>|<strong>n</strong>]]</dt><dd><p><em>x_inc</em> [and optionally <em>y_inc</em>] is the grid spacing. Optionally,
-append a suffix modifier. <strong>Geographical (degrees) coordinates</strong>: Append
+<dt><strong>-I</strong><em>xinc</em>[<strong>+e</strong>|<strong>n</strong>][/<em>yinc</em>[<strong>+e</strong>|<strong>n</strong>]]</dt><dd><p><em>x_inc</em> [and optionally <em>y_inc</em>] is the grid spacing. <strong>Geographical
+(degrees) coordinates</strong>: Optionally, append a increment unit. Choose among
 <strong>m</strong> to indicate arc minutes or <strong>s</strong> to indicate arc seconds. If one
 of the units <strong>e</strong>, <strong>f</strong>, <strong>k</strong>, <strong>M</strong>, <strong>n</strong> or <strong>u</strong> is appended
 instead, the increment is assumed to be given in meter, foot, km, Mile,
@@ -305,11 +315,12 @@ adjusted to fit exactly the given increment [by default the increment
 may be adjusted slightly to fit the given domain]. Finally, instead of
 giving an increment you may specify the <em>number of nodes</em> desired by
 appending <strong>+n</strong> to the supplied integer argument; the increment is then
-recalculated from the number of nodes and the domain. The resulting
-increment value depends on whether you have selected a
+recalculated from the number of nodes, the <em>registration</em>, and the domain.
+The resulting increment value depends on whether you have selected a
 gridline-registered or pixel-registered grid; see <a class="reference internal" href="cookbook/file-formats.html#gmt-file-formats"><span class="std std-ref">GMT File Formats</span></a> for
-details. <strong>Note</strong>: If <strong>-R</strong><em>grdfile</em> is used then the grid spacing (and registration) have
-already been initialized; use <strong>-I</strong> (and <strong>-r</strong>) to override the values.</p>
+details. <strong>Note</strong>: If <strong>-R</strong><em>grdfile</em> is used then the grid spacing and
+the registration have already been initialized; use <strong>-I</strong> and <strong>-r</strong>
+to override these values.</p>
 </dd>
 </dl>
 <span class="target" id="r"></span><dl class="simple">
@@ -339,8 +350,7 @@ intermediate (coarser) grids the effective convergence limit is divided
 by the grid spacing multiplier.</p>
 </dd>
 </dl>
-<p id="j"><strong>-J</strong><em>parameters</em></p>
-<dl class="simple">
+<span class="target" id="j"></span><dl class="simple">
 <dt><strong>-J</strong><em>parameters</em> <a class="reference internal" href="gmt.html#j-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Select map projection. Select the data map projection. This projection is only used to add a referencing info
 to the grid formats that support it. E.g. netCDF, GeoTIFF, and others supported by GDAL.</p>
 </dd>
@@ -455,7 +465,7 @@ idea to monitor each iteration with the <strong>-Vi</strong> option. [Default =
 </dd>
 </dl>
 <dl class="simple">
-<dt><strong>-i</strong><em>cols</em>[<strong>+l</strong>][<strong>+s</strong><em>scale</em>][<strong>+o</strong><em>offset</em>][,<em>…</em>][,<strong>t</strong>[<em>word</em>]] <a class="reference internal" href="gmt.html#icols-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Select input columns and transformations (0 is first column, <strong>t</strong> is trailing text, append <em>word</em> to read one word only).</p>
+<dt><strong>-i</strong><em>cols</em>[<strong>+l</strong>][<strong>+d</strong><em>divide</em>][<strong>+s</strong><em>scale</em>][<strong>+o</strong><em>offset</em>][,<em>…</em>][,<strong>t</strong>[<em>word</em>]] <a class="reference internal" href="gmt.html#icols-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Select input columns and transformations (0 is first column, <strong>t</strong> is trailing text, append <em>word</em> to read one word only).</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -464,6 +474,10 @@ idea to monitor each iteration with the <strong>-Vi</strong> option. [Default =
 </dl>
 <dl class="simple">
 <dt><strong>-r</strong>[<strong>g</strong>|<strong>p</strong>] <a class="reference internal" href="gmt.html#nodereg-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Set node registration [gridline].  </p>
+</dd>
+</dl>
+<dl class="simple">
+<dt><strong>-wy</strong>|<strong>a</strong>|<strong>w</strong>|<strong>d</strong>|<strong>h</strong>|<strong>m</strong>|<strong>s</strong>|<strong>c</strong><em>period</em>[/<em>phase</em>][<strong>+c</strong><em>col</em>] <a class="reference internal" href="gmt.html#w-full"><span class="std std-ref">(more …)</span></a></dt><dd><p>Convert an input coordinate to a cyclical coordinate.</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -615,9 +629,9 @@ splines in tension, <em>Geophysics</em>, 55, 293-305.</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, The GMT Team.
+        &copy; Copyright 2021, The GMT Team.
       <span class="lastupdated">
-        Last updated on Dec 02, 2020.
+        Last updated on Mar 09, 2021.
       </span>
 
     </p>

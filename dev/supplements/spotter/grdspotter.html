@@ -14,6 +14,11 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
 
   
@@ -33,8 +38,10 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -132,6 +139,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../debug.html">Debugging GMT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">GMT C API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../postscriptlight.html">PostScriptLight C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devdocs.html">Developer Documentation</a></li>
 </ul>
 
             
@@ -224,20 +232,20 @@
 <p>Create CVA grid from a gravity or topography grid</p>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><strong>gmt grdspotter</strong> [<em>grdfile</em>] <a class="reference internal" href="#e"><span> <strong>-E</strong></span></a></strong><em>rotfile</em> <a class="reference internal" href="#g"><span> <strong>-G</strong></span></a></strong><em>CVAgrid</em>
-<a class="reference internal" href="#i"><span> <strong>-I</strong></span></a></strong><em>increment</em>
-<a class="reference internal" href="#r"><span> <strong>-R</strong></span></a></strong><em>region</em>
-[ <a class="reference internal" href="#a"><span> <strong>-A</strong></span></a></strong><em>agegrid</em> ]
-[ <a class="reference internal" href="#d"><span> <strong>-D</strong></span></a></strong><em>DIgrid</em> ]
-[ <a class="reference internal" href="#l"><span> <strong>-L</strong></span></a></strong><em>IDgrid</em> ]
-[ <a class="reference internal" href="#m"><span> <strong>-M</strong></span></a></strong> ]
-[ <a class="reference internal" href="#n"><span> <strong>-N</strong></span></a></strong><em>upper_age</em> ]
-[ <a class="reference internal" href="#p"><span> <strong>-P</strong></span></a></strong><em>PAgrid</em> ]
-[ <a class="reference internal" href="#q"><span> <strong>-Q</strong></span></a></strong><em>IDinfo</em> ]
-[ <a class="reference internal" href="#s"><span> <strong>-S</strong></span></a></strong> ]
-[ <a class="reference internal" href="#t"><span> <strong>-T</strong></span></a></strong><strong>t</strong>|<strong>u</strong><em>fixed_val</em> ] [
-[ <a class="reference internal" href="#v"><span> <strong>-V</strong></span></a></strong>[<em>level</em>] ]
-[ <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong><em>n_try</em> ]] [ <strong>-Z</strong><em>z_min</em>[/<em>z_max</em>[/<em>z_inc</em>]] ]
+<p><strong>gmt grdspotter</strong> [<em>grdfile</em>] <a class="reference internal" href="#e"><span><strong>-E</strong></span></a></strong><em>rotfile</em> <a class="reference internal" href="#g"><span><strong>-G</strong></span></a></strong><em>CVAgrid</em>
+<a class="reference internal" href="#i"><span><strong>-I</strong></span></a></strong><em>increment</em>
+<a class="reference internal" href="#r"><span><strong>-R</strong></span></a></strong><em>region</em>
+[ <a class="reference internal" href="#a"><span><strong>-A</strong></span></a></strong><em>agegrid</em> ]
+[ <a class="reference internal" href="#d"><span><strong>-D</strong></span></a></strong><em>DIgrid</em> ]
+[ <a class="reference internal" href="#l"><span><strong>-L</strong></span></a></strong><em>IDgrid</em> ]
+[ <a class="reference internal" href="#m"><span><strong>-M</strong></span></a></strong> ]
+[ <a class="reference internal" href="#n"><span><strong>-N</strong></span></a></strong><em>upper_age</em> ]
+[ <a class="reference internal" href="#p"><span><strong>-P</strong></span></a></strong><em>PAgrid</em> ]
+[ <a class="reference internal" href="#q"><span><strong>-Q</strong></span></a></strong><em>IDinfo</em> ]
+[ <a class="reference internal" href="#s"><span><strong>-S</strong></span></a></strong> ]
+[ <a class="reference internal" href="#t"><span><strong>-T</strong></span></a></strong><strong>t</strong>|<strong>u</strong><em>fixed_val</em> ] [
+[ <a class="reference internal" href="#v"><span><strong>-V</strong></span></a></strong>[<em>level</em>] ]
+[ <a class="reference internal" href="#w"><span><strong>-W</strong></span></a></strong><em>n_try</em> ]] [ <strong>-Z</strong><em>z_min</em>[/<em>z_max</em>[/<em>z_inc</em>]] ]
 [ <strong>-r</strong><a class="reference internal" href="../../gmt.html#nodereg-full"><span class="std std-ref">reg</span></a> ]
 [ <strong>--PAR</strong>=<em>value</em> ]</p>
 <p><strong>Note:</strong> No space is allowed between the option flag and the associated arguments.</p>
@@ -289,8 +297,8 @@ a single total reconstruction rotation.</p>
 </dd>
 </dl>
 <dl class="simple" id="i">
-<dt><strong>-I</strong><em>xinc</em>[<strong>+e</strong>|<strong>n</strong>][/<em>yinc</em>[<strong>+e</strong>|<strong>n</strong>]]</dt><dd><p><em>x_inc</em> [and optionally <em>y_inc</em>] is the grid spacing. Optionally,
-append a suffix modifier. <strong>Geographical (degrees) coordinates</strong>: Append
+<dt><strong>-I</strong><em>xinc</em>[<strong>+e</strong>|<strong>n</strong>][/<em>yinc</em>[<strong>+e</strong>|<strong>n</strong>]]</dt><dd><p><em>x_inc</em> [and optionally <em>y_inc</em>] is the grid spacing. <strong>Geographical
+(degrees) coordinates</strong>: Optionally, append a increment unit. Choose among
 <strong>m</strong> to indicate arc minutes or <strong>s</strong> to indicate arc seconds. If one
 of the units <strong>e</strong>, <strong>f</strong>, <strong>k</strong>, <strong>M</strong>, <strong>n</strong> or <strong>u</strong> is appended
 instead, the increment is assumed to be given in meter, foot, km, Mile,
@@ -304,11 +312,12 @@ adjusted to fit exactly the given increment [by default the increment
 may be adjusted slightly to fit the given domain]. Finally, instead of
 giving an increment you may specify the <em>number of nodes</em> desired by
 appending <strong>+n</strong> to the supplied integer argument; the increment is then
-recalculated from the number of nodes and the domain. The resulting
-increment value depends on whether you have selected a
+recalculated from the number of nodes, the <em>registration</em>, and the domain.
+The resulting increment value depends on whether you have selected a
 gridline-registered or pixel-registered grid; see <a class="reference internal" href="../../cookbook/file-formats.html#gmt-file-formats"><span class="std std-ref">GMT File Formats</span></a> for
-details. <strong>Note</strong>: If <strong>-R</strong><em>grdfile</em> is used then the grid spacing (and registration) have
-already been initialized; use <strong>-I</strong> (and <strong>-r</strong>) to override the values.</p>
+details. <strong>Note</strong>: If <strong>-R</strong><em>grdfile</em> is used then the grid spacing and
+the registration have already been initialized; use <strong>-I</strong> and <strong>-r</strong>
+to override these values.</p>
 </dd>
 </dl>
 <span class="target" id="r"></span><dl class="simple">
@@ -357,7 +366,7 @@ plotted, with no third dimension.  </p>
 <dt><strong>-A</strong><em>agegrid</em></dt><dd><p>Supply a crustal age grid that is co-registered with the input data
 grid. These ages become the upper ages to use when constructing
 flowlines [Default extend flowlines back to oldest age found in the
-rotation file; but see <a class="reference internal" href="#n"><span> <strong>-N</strong></span></a></strong>].</p>
+rotation file; but see <a class="reference internal" href="#n"><span><strong>-N</strong></span></a></strong>].</p>
 </dd>
 </dl>
 <dl class="simple" id="d">
@@ -368,7 +377,7 @@ the originating nodes.</p>
 </dl>
 <dl class="simple" id="l">
 <dt><strong>-L</strong><em>IDgrid</em></dt><dd><p>Supply a co-registered grid with seamount chain IDs for each node.
-This option requires that you also use <a class="reference internal" href="#q"><span> <strong>-Q</strong></span></a></strong>.</p>
+This option requires that you also use <a class="reference internal" href="#q"><span><strong>-Q</strong></span></a></strong>.</p>
 </dd>
 </dl>
 <dl class="simple" id="m">
@@ -381,7 +390,7 @@ with <strong>-W</strong> or the multi-slice mode in <strong>-Z</strong>.</p>
 </dl>
 <dl class="simple" id="n">
 <dt><strong>-N</strong><em>upper_age</em></dt><dd><p>Set the upper age to assign to nodes whose crustal age is unknown
-(i.e., NaN) [no upper age]. Also see <a class="reference internal" href="#a"><span> <strong>-A</strong></span></a></strong>.</p>
+(i.e., NaN) [no upper age]. Also see <a class="reference internal" href="#a"><span><strong>-A</strong></span></a></strong>.</p>
 </dd>
 </dl>
 <dl class="simple" id="p">
@@ -406,9 +415,9 @@ This also normalizes the DI grid (if requested).</p>
 </dl>
 <dl class="simple" id="t">
 <dt><strong>-T</strong><strong>t</strong>|<strong>u</strong><em>fixed_val</em></dt><dd><p>Selects ways to adjust ages; repeatable. Choose from <strong>-Tt</strong> to
-truncate crustal ages given via the <a class="reference internal" href="#a"><span> <strong>-A</strong></span></a></strong> option that exceed the
-upper age set with <a class="reference internal" href="#n"><span> <strong>-N</strong></span></a></strong> [no truncation], or <a class="reference internal" href="#t"><span> <strong>-T</strong></span></a></strong><strong>u</strong><em>fixed_val</em>
-which means that after a node passes the test implied by <a class="reference internal" href="#z"><span> <strong>-Z</strong></span></a></strong>, we
+truncate crustal ages given via the <a class="reference internal" href="#a"><span><strong>-A</strong></span></a></strong> option that exceed the
+upper age set with <a class="reference internal" href="#n"><span><strong>-N</strong></span></a></strong> [no truncation], or <a class="reference internal" href="#t"><span><strong>-T</strong></span></a></strong><strong>u</strong><em>fixed_val</em>
+which means that after a node passes the test implied by <a class="reference internal" href="#z"><span><strong>-Z</strong></span></a></strong>, we
 use this <em>fixed_val</em> instead in the calculations. [Default uses
 individual node values].</p>
 </dd>
@@ -518,9 +527,9 @@ doi:10.1029/2008GC002058.</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, The GMT Team.
+        &copy; Copyright 2021, The GMT Team.
       <span class="lastupdated">
-        Last updated on Dec 02, 2020.
+        Last updated on Mar 09, 2021.
       </span>
 
     </p>

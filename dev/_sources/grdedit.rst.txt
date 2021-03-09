@@ -28,6 +28,7 @@ Synopsis
 [ |SYN_OPT-f| ]
 [ |SYN_OPT-h| ]
 [ |SYN_OPT-i| ]
+[ |SYN_OPT-w| ]
 [ |SYN_OPT-:| ]
 [ |SYN_OPT--| ]
 
@@ -49,7 +50,7 @@ Required Arguments
 ------------------
 
 *grid*
-    Name of the 2-D grid file to modify. (See GRID FILE FORMATS below).
+    Name of the 2-D grid file to modify. (See :ref:`Grid File Formats <grd_inout_full>`).
 
 Optional Arguments
 ------------------
@@ -158,9 +159,9 @@ Optional Arguments
 
 .. include:: explain_-icols.rst_
 
-.. include:: explain_help.rst_
+.. include:: explain_-w.rst_
 
-.. include:: explain_grd_inout_short.rst_
+.. include:: explain_help.rst_
 
 .. include:: explain_grd_coord.rst_
 

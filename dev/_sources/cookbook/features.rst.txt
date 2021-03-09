@@ -63,6 +63,8 @@ indicate the units of your arguments by appending the unit character, as
 discussed below. This will aid you in debugging, let others understand your
 scripts, and remove any uncertainty as to what unit you thought you wanted.
 
+.. _plt-units:
+
 Dimension units
 ~~~~~~~~~~~~~~~
 
@@ -78,10 +80,15 @@ two ways to ensure that GMT understands which unit you intend to use:
 
 #. Set the parameter :term:`PROJ_LENGTH_UNIT` to the desired unit. Then,
    all dimensions without explicit units will be interpreted accordingly.
+   By default, GMT always initializes :term:`PROJ_LENGTH_UNIT` to cm and
+   interprets unitless dimensional values as cm, except for fonts and pen
+   thicknesses which are by default interpreted as points.
 
 The latter method is less robust as other users may have a different
 default unit set and then your script may not work as intended. For portability,
 we therefore recommend you always append the desired unit explicitly.
+
+.. _dist-units:
 
 Distance units
 ~~~~~~~~~~~~~~
@@ -106,10 +113,10 @@ For Cartesian data the data units do not normally matter
 Geographic data are different, as distances can be specified in a variety
 of ways. GMT programs that accept actual Earth length scales like
 search radii or distances can therefore handle a variety of units. These
-choices are listed in Table :ref:`distunits <tbl-distunits>`; simply append the desired
-unit to the distance value you supply. A value without a unit suffix
-will be consider to be in meters. For example, a distance of 30 nautical
-miles should be given as 30\ **n**.
+choices are listed in the Table :ref:`Distance Units <tbl-distunits>`;
+simply append the desired unit to the distance value you supply. A value
+without a unit suffix will be consider to be in meters. For example, a distance
+of 30 nautical miles should be given as 30\ **n**.
 
 Distance calculations
 ~~~~~~~~~~~~~~~~~~~~~
@@ -161,8 +168,7 @@ for an ellipsoid is required (typically for a limited surface area). For
 instance, a search radius of 5000 feet using this mode of computation
 would be specified as **-S**\ 5000\ **f**.
 
-**Note**: There are two additional
-GMT defaults that control how
+**Note**: There are two additional GMT defaults that control how
 great circle (and Flat Earth) distances are computed. One concerns the
 selection of the "mean radius". This is selected by
 :term:`PROJ_MEAN_RADIUS`, which selects one of several possible
@@ -627,7 +633,7 @@ option argument, with commas separating the given attributes, e.g.,
     you zoom in on the feature in a display, the line thickness stays
     at the minimum. Finally, a few predefined
     pen names can be used: default, faint, and {thin, thick,
-    fat}[er\|\ est], and obese. Table :ref:`pennames <tbl-pennames>` shows this
+    fat}[er\|\ est], and wide. Table :ref:`pennames <tbl-pennames>` shows this
     list and the corresponding pen widths.
 
 .. _tbl-pennames:
@@ -644,7 +650,7 @@ option argument, with commas separating the given attributes, e.g.,
     +------------+---------+------------+--------+
     | thin       | 0.75p   | fattest    | 10p    |
     +------------+---------+------------+--------+
-    | thick      | 1.0p    | obese      | 18p    |
+    | thick      | 1.0p    | wide       | 18p    |
     +------------+---------+------------+--------+
 
 .. _color_attrib:
@@ -719,14 +725,38 @@ controlled via the GMT defaults settings :term:`PS_LINE_CAP`,
 segment ending is rendered, be it at the termination of a solid line or
 at the end of all dashed line segments making up a line, and how a
 straight lines of finite thickness should behave when joined at a common
-point. By default, line segments have rectangular ends, but this can
+point, as shown in Figures :ref:`Cap <Cap_settings>` and :ref:`Miter <Miter_settings>`.
+
+.. _Cap_settings:
+
+.. figure:: /_images/GMT_cap.*
+   :width: 400 px
+   :align: center
+
+   Line appearance can be varied by using :term:`PS_LINE_CAP`, choosing from **SQUARE** [Default],
+   **ROUND**, or **BUTT**.  The circles and thin lines indicate the coordinates.  All lines
+   where plotted with the same width and dash-spacing (-W10p,20_20:0).
+
+.. _Miter_settings:
+
+.. figure:: /_images/GMT_joint.*
+   :width: 550 px
+   :align: center
+
+   Given lines have finite thickness, there are three types of joints where line-segments
+   meet that can be adjusted with :term:`PS_LINE_JOIN`.  There is **BEVEL**, **ROUND**, and
+   **MITER**.  The last setting also depends on :term:`PS_MITER_LIMIT` which sets a limit on
+   the angle at the mitered joint below which we apply a bevel.
+
+By default, line segments have rectangular ends, but this can
 change to give rounded ends. When :term:`PS_LINE_CAP` is set to round the
 a segment length of zero will appear as a circle. This can be used to
 created circular dotted lines, and by manipulating the phase shift in
 the *style* attribute and plotting the same line twice one can even
 alternate the color of adjacent items.
 Figure :ref:`Line appearance <Line_appearance>` shows various lines made in this
-fashion. See the :doc:`/gmt.conf` man page for more information.
+fashion by adjusting the joint and cap settings as well as plotting lines twice with
+different phase *offset* and color. See the :doc:`/gmt.conf` man page for more information.
 
 .. _Line_appearance:
 
@@ -1520,6 +1550,8 @@ the different features in more detail we will first review the "reference point/
 system used by GMT to specify such locations in relation to the underlying map, and then discuss
 the background panel attribute settings.
 
+.. _Reference_Points:
+
 Reference and anchor point specification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1545,10 +1577,14 @@ There are four different ways to specify the reference point on a map, allowing 
 to select any location inside or outside the map.  The reference point syntax is [**g**\|\ **j**\|\ **J**\|\ **n**\|\ **x**]\ *refpoint*;
 the five codes **g**\|\ **j**\|\ **J**\|\ **n**\|\ **x** refer to the five ways:
 
+.. _Reference_Points_g:
+
 #. [**g**] Specify *refpoint* using *data* coordinates, e.g., the longitude and latitude of the reference point.
    This mechanism is useful when you want to tie the location of the feature to an actual point
    best described by data coordinates.  An example of such a reference point might
    be **g**\ 135W/20N.
+
+.. _Reference_Points_j:
 
 #. [**j**] Specify *refpoint* using one of the nine *justification codes*, equivalent to the justification
    codes for placing text strings in :doc:`/text`.  This mechanism is illustrated in the figure above and
@@ -1562,10 +1598,14 @@ the five codes **g**\|\ **j**\|\ **J**\|\ **n**\|\ **x** refer to the five ways:
    justification code. Thus, when using **JTL**\, the anchor point on the map feature will default to **BR**.
    This is practical for features that are drawn **outside** of the basemap (like color bars often are).
 
+.. _Reference_Points_x:
+
 #. [**x**] Specify *refpoint* using *plot* coordinates, i.e., the distances in inches, centimeters, or
    points from the lower left plot origin.  This mechanism is preferred when you wish to lay out
    map features using familiar measurements of distance from origins. An example of such a reference
    point might be **x**\ 2.75i/2c.
+
+.. _Reference_Points_n:
 
 #. [**n**] Specify *refpoint* using *normalized* coordinates, i.e., fractional coordinates between 0
    and 1 in both the *x* and *y* directions.  This mechanism avoids units and is useful if you want to always
@@ -1573,6 +1613,8 @@ the five codes **g**\|\ **j**\|\ **J**\|\ **n**\|\ **x** refer to the five ways:
    An example of such a reference point might be **n**\ 0.2/0.1.
 
 If no code is specified we default to **x**.
+
+.. _Anchor_Point_j:
 
 With the reference point taken care of, it is time to select the anchor point.
 While the reference point selection gives unlimited flexibility to pick
@@ -1584,6 +1626,8 @@ used to set it), or to the mirror opposite of the reference point (if **J**\ *co
 specifications of the reference point, the anchor point takes on the default value of **MC** (for map rose and
 map scale) or **BL** (all other map features). Adding **+j**\ *anchor* overrules those defaults.
 For instance, **+jTR**\  would select the top right point on the map feature as the anchor.
+
+.. _Anchor_Point_o:
 
 It is likely that you will wish to offset the anchor point away from
 your selection by some arbitrary amount, particularly if the reference point is specified with **j**\|\ **J**\ *code*.
@@ -1601,6 +1645,7 @@ Similarly, **+jBR** will align the bottom right corner of the map feature, and *
 and 1 cm up. When using middle (**M**) or center (**C**) justifications, to offset works the same way as bottom (**B**) or left (**L**),
 respectively, i.e., moving the map feature up or to the right.
 
+.. _Background-panel:
 
 The background panel
 ~~~~~~~~~~~~~~~~~~~~
@@ -1650,6 +1695,8 @@ the attributes that are under your control:
    rectangle was specified with **-F+g**\ lightgreen\ **+r**, while the white panel on the
    lower right was set with **-F+p**\ 1p\ **+i+s+g**\ white\ **+c**\ 0.1i (we added a light
    dashed box to indicate the effect of the clearance setting).
+
+.. _Placing-map-scales:
 
 Placing map scales
 ~~~~~~~~~~~~~~~~~~
@@ -2018,7 +2065,7 @@ read directly by GMT and the netCDF grids written by GMT can be read
 by other programs that conform to those conventions. Three such programs are
 `ncview <http://meteora.ucsd.edu/~pierce/ncview_home_page.html>`_, `Panoply
 <http://www.giss.nasa.gov/tools/panoply/>`_, and `ncBrowse
-<http://www.epic.noaa.gov/java/ncBrowse/>`_ ; others can be found on the
+<https://www.pmel.noaa.gov/epic/java/ncBrowse/>`_ ; others can be found on the
 `netCDF website <http://www.unidata.ucar.edu/software/netcdf/software.html>`_.
 Note that although many additional programs can read netCDF files, some are unable
 to read netcdf 4 files (if data compression has been applied).
